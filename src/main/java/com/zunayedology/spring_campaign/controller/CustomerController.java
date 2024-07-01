@@ -17,8 +17,8 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<CustomerDTO> getCustomers() {
-        return customerService.getCustomers();
+    public List<CustomerDTO> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/{id}")
