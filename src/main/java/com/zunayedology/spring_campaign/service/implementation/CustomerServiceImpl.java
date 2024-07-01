@@ -5,10 +5,12 @@ import com.zunayedology.spring_campaign.entity.Customer;
 import com.zunayedology.spring_campaign.mapper.CustomerMapper;
 import com.zunayedology.spring_campaign.repository.CustomerRepository;
 import com.zunayedology.spring_campaign.service.CustomerService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
 

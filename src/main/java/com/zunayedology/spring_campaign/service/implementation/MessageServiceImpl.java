@@ -8,10 +8,12 @@ import com.zunayedology.spring_campaign.repository.CustomerRepository;
 import com.zunayedology.spring_campaign.repository.MessageRepository;
 import com.zunayedology.spring_campaign.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
 
