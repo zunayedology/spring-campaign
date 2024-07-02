@@ -1,13 +1,10 @@
 package com.zunayedology.spring_campaign.service.implementation;
 
 import com.zunayedology.spring_campaign.dto.MessageDTO;
-import com.zunayedology.spring_campaign.entity.Customer;
 import com.zunayedology.spring_campaign.entity.Message;
 import com.zunayedology.spring_campaign.mapper.MessageMapper;
-import com.zunayedology.spring_campaign.repository.CustomerRepository;
 import com.zunayedology.spring_campaign.repository.MessageRepository;
 import com.zunayedology.spring_campaign.service.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,9 +17,6 @@ public class MessageServiceImpl implements MessageService {
     public MessageServiceImpl(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
-
-//    @Autowired
-//    private CustomerRepository customerRepository;
 
     @Override
     public List<MessageDTO> getAllMessages() {
@@ -38,8 +32,9 @@ public class MessageServiceImpl implements MessageService {
         return MessageMapper.mapToMessageDTO(message);
     }
 
+
     @Override
-    public MessageDTO createMessage(MessageDTO messageDto) {
+    public MessageDTO generateMessage(MessageDTO messageDto) {
         Message message = MessageMapper.mapToMessage(messageDto);
         message = messageRepository.save(message);
         return MessageMapper.mapToMessageDTO(message);
@@ -66,18 +61,5 @@ public class MessageServiceImpl implements MessageService {
         }
         messageRepository.delete(message);
     }
-
-//    @Override
-//    public void sendMessage(Long id) {
-//        Message message = messageRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Message not found"));
-//        if (message.isSent()) {
-//            throw new RuntimeException("Message is already sent");
-//        }
-//        List<Customer> customers = customerRepository.findAll();
-//        for (Customer customer : customers) {}
-//        message.setSent(true);
-//        messageRepository.save(message);
-//    }
 
 }

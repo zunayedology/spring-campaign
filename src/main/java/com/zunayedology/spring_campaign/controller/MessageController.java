@@ -11,6 +11,7 @@ import java.util.List;
 @RequestMapping("/api/messages")
 public class MessageController {
     private final MessageService messageService;
+
     public MessageController(MessageService messageService) {
         this.messageService = messageService;
     }
@@ -27,8 +28,8 @@ public class MessageController {
     }
 
     @PostMapping
-    public ResponseEntity<MessageDTO> createMessage(@RequestBody MessageDTO messageDTO) {
-        MessageDTO createdMessage = messageService.createMessage(messageDTO);
+    public ResponseEntity<MessageDTO> generateMessage(@RequestBody MessageDTO messageDTO) {
+        MessageDTO createdMessage = messageService.generateMessage(messageDTO);
         return ResponseEntity.ok(createdMessage);
     }
 
