@@ -33,12 +33,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
 
-    @Override
-    public MessageDTO generateMessage(MessageDTO messageDto) {
-        Message message = MessageMapper.mapToMessage(messageDto);
-        message = messageRepository.save(message);
-        return MessageMapper.mapToMessageDTO(message);
-    }
+//    @Override
+//    public MessageDTO generateMessage(MessageDTO messageDto) {
+//        Message message = MessageMapper.mapToMessage(messageDto);
+//        message = messageRepository.save(message);
+//        return MessageMapper.mapToMessageDTO(message);
+//    }
 
     @Override
     public MessageDTO updateMessage(Long id, MessageDTO messageDto) {

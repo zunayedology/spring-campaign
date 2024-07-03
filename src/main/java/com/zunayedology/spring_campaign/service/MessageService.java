@@ -7,7 +7,7 @@ import java.util.List;
 public interface MessageService {
     List<MessageDTO> getAllMessages();
     MessageDTO getMessageById(Long id);
-    MessageDTO generateMessage(MessageDTO messageDto);
+//    MessageDTO generateMessage(MessageDTO messageDto);
     MessageDTO updateMessage(Long id, MessageDTO messageDto);
     void deleteMessage(Long id);
 }
