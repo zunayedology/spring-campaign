@@ -30,6 +30,7 @@ const App = () => {
   ];
   return (
     <>
+      <h1>Spring Campaign</h1>
       <Button
         onClick={() => {
           setSelectedCustomer(null);
