@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { Button, message, Table } from "antd";
 import { deleteCustomer, getAllCustomers } from "./api/customerApi";
+import CustomerModal from "./components/CustomerModal";
 
 const App = () => {
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const [, setIsCustomerModalVisible] = useState(false);
+  const [isCustomerModalVisible, setIsCustomerModalVisible] = useState(false);
 
   useEffect(() => {
     fetchCustomers();
   }, []);
+
   const fetchCustomers = async () => {
     const response = await getAllCustomers();
     setCustomers(response?.data);
@@ -34,19 +36,19 @@ const App = () => {
           setIsCustomerModalVisible(true);
         }}
       >
-        New Account
+        New Customer
       </Button>
       <Button
         onClick={() => setIsCustomerModalVisible(true)}
         disabled={!selectedCustomer}
       >
-        Update
+        Update Customer
       </Button>
       <Button
         onClick={() => handleDelete(selectedCustomer?.id)}
         disabled={!selectedCustomer}
       >
-        Delete
+        Delete Customer
       </Button>
 
       <Table
@@ -58,6 +60,14 @@ const App = () => {
         }}
         rowKey="id"
       />
+      {isCustomerModalVisible && (
+        <CustomerModal
+          visible={isCustomerModalVisible}
+          onClose={() => setIsCustomerModalVisible(false)}
+          onRefresh={fetchCustomers}
+          customer={selectedCustomer}
+        />
+      )}
     </>
   );
 };
