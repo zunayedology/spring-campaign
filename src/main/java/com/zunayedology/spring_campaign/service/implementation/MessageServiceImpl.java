@@ -5,6 +5,10 @@ import com.zunayedology.spring_campaign.entity.Message;
 import com.zunayedology.spring_campaign.mapper.MessageMapper;
 import com.zunayedology.spring_campaign.repository.MessageRepository;
 import com.zunayedology.spring_campaign.service.MessageService;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.Generation;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +17,12 @@ import java.util.stream.Collectors;
 @Service
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
+    private final ChatClient chatClient;
 
-    public MessageServiceImpl(MessageRepository messageRepository) {
+    public MessageServiceImpl(MessageRepository messageRepository
+    , ChatClient.Builder chatClientBuilder) {
         this.messageRepository = messageRepository;
+        this.chatClient = chatClientBuilder.build();
     }
 
     @Override
@@ -33,12 +40,22 @@ public class MessageServiceImpl implements MessageService {
     }
 
 
-//    @Override
-//    public MessageDTO generateMessage(MessageDTO messageDto) {
-//        Message message = MessageMapper.mapToMessage(messageDto);
-//        message = messageRepository.save(message);
-//        return MessageMapper.mapToMessageDTO(message);
-//    }
+    @Override
+    public MessageDTO generateMessage(String topic) {
+        PromptTemplate promptTemplate = new PromptTemplate(
+                "Write a wish message for a customer on" + topic
+        );
+        Prompt prompt = promptTemplate.create();
+
+        ChatClient.ChatClientRequest.CallPromptResponseSpec
+                responseSpec = chatClient.prompt(prompt).call();
+        List<Generation> responses = responseSpec.chatResponse().getResults();
+
+        Message newMessage = new Message();
+        newMessage.setMessageBody(responses.get(0).getOutput().getContent());
+        newMessage = messageRepository.save(newMessage);
+        return MessageMapper.mapToMessageDTO(newMessage);
+    }
 
     @Override
     public MessageDTO updateMessage(Long id, MessageDTO messageDto) {

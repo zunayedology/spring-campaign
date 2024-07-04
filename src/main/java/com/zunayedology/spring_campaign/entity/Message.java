@@ -17,7 +17,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "message_body", nullable = false)
+    @Column(name = "message_body", length = 10000, nullable = false)
     private String messageBody;
 
     @Column(name = "is_sent", nullable = false)

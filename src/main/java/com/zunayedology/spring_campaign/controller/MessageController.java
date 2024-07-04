@@ -1,14 +1,7 @@
 package com.zunayedology.spring_campaign.controller;
 
 import com.zunayedology.spring_campaign.dto.MessageDTO;
-import com.zunayedology.spring_campaign.entity.Message;
-import com.zunayedology.spring_campaign.repository.MessageRepository;
 import com.zunayedology.spring_campaign.service.MessageService;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.model.Generation;
-import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,15 +10,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/messages")
 public class MessageController {
-    @Autowired
-    private MessageRepository messageRepository;
-    private final ChatClient chatClient;
     private final MessageService messageService;
 
-    public MessageController(MessageService messageService,
-                             ChatClient.Builder chatClientBuilder) {
+    public MessageController(MessageService messageService) {
         this.messageService = messageService;
-        this.chatClient = chatClientBuilder.build();
     }
 
     @GetMapping
@@ -40,16 +28,9 @@ public class MessageController {
     }
 
     @PostMapping("/ai")
-    public String generateMessage(@RequestParam String topic) {
-        PromptTemplate promptTemplate = new PromptTemplate("Write a poem about" + topic);
-        Prompt prompt = promptTemplate.create();
-        ChatClient.ChatClientRequest.CallPromptResponseSpec responseSpec = chatClient.prompt(prompt).call();
-        List<Generation> responses = responseSpec.chatResponse().getResults();
-        Message message = new Message();
-        message.setMessageBody(responses.get(0).getOutput().getContent());
-        messageRepository.save(message);
-
-        return responses.get(0).getOutput().getContent();
+    public ResponseEntity<MessageDTO> generateMessage(@RequestParam String topic) {
+        MessageDTO newMessage = messageService.generateMessage(topic);
+        return ResponseEntity.ok(newMessage);
     }
 
     @PutMapping("/{id}")
