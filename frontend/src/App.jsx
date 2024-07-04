@@ -16,8 +16,8 @@ const App = () => {
         setCustomers(response?.data);
     }
 
-    const handleDelete = async () => {
-        await deleteCustomer();
+    const handleDelete = async (id) => {
+        await deleteCustomer(id);
         message.success("Customer deleted");
         await fetchCustomers();
     }
@@ -42,7 +42,7 @@ const App = () => {
             Update
           </Button>
           <Button
-            onClick={() => handleDelete(setCustomers?.id)}
+            onClick={() => handleDelete(selectedCustomer?.id)}
             disabled={!selectedCustomer}>
             Delete
           </Button>
