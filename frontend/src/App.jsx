@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, message, Table } from "antd";
 import { deleteCustomer, getAllCustomers } from "./api/customerApi";
 import CustomerModal from "./components/CustomerModal";
+import MessageBox from "./components/MessageBox";
 
 const App = () => {
   const [customers, setCustomers] = useState([]);
@@ -69,6 +70,7 @@ const App = () => {
           customer={selectedCustomer}
         />
       )}
+      <MessageBox />
     </>
   );
 };

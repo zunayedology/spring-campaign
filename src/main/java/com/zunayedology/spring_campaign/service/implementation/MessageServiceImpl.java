@@ -20,7 +20,7 @@ public class MessageServiceImpl implements MessageService {
     private final ChatClient chatClient;
 
     public MessageServiceImpl(MessageRepository messageRepository
-    , ChatClient.Builder chatClientBuilder) {
+            , ChatClient.Builder chatClientBuilder) {
         this.messageRepository = messageRepository;
         this.chatClient = chatClientBuilder.build();
     }
@@ -43,7 +43,8 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public MessageDTO generateMessage(String topic) {
         PromptTemplate promptTemplate = new PromptTemplate(
-                "Write a wish message for a customer on" + topic
+                "Write a wish message for a customer on the occasion of "
+                        + topic + "from Bangladesh-based IT company RedDot Digital Limited"
         );
         Prompt prompt = promptTemplate.create();
 
