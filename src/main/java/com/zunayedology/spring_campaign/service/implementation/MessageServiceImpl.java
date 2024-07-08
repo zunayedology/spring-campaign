@@ -1,6 +1,6 @@
 package com.zunayedology.spring_campaign.service.implementation;
 
-import com.zunayedology.spring_campaign.dto.MessageDTO;
+import com.zunayedology.spring_campaign.dto.MessageDto;
 import com.zunayedology.spring_campaign.entity.Message;
 import com.zunayedology.spring_campaign.mapper.MessageMapper;
 import com.zunayedology.spring_campaign.repository.MessageRepository;
@@ -26,14 +26,14 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<MessageDTO> getAllMessages() {
+    public List<MessageDto> getAllMessages() {
         return messageRepository.findAll().stream()
                 .map(MessageMapper::mapToMessageDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public MessageDTO getMessageById(Long id) {
+    public MessageDto getMessageById(Long id) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found"));
         return MessageMapper.mapToMessageDTO(message);
@@ -41,7 +41,7 @@ public class MessageServiceImpl implements MessageService {
 
 
     @Override
-    public MessageDTO generateMessage(String topic) {
+    public MessageDto generateMessage(String topic) {
         PromptTemplate promptTemplate = new PromptTemplate(
                 "Write a wish message for a customer on the occasion of "
                         + topic + "from Bangladesh-based IT company RedDot Digital Limited"
@@ -59,7 +59,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public MessageDTO updateMessage(Long id, MessageDTO messageDto) {
+    public MessageDto updateMessage(Long id, MessageDto messageDto) {
         Message existingMessage = messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found"));
         if (existingMessage.isSent()) {

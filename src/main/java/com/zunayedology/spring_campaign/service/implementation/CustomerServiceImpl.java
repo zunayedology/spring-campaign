@@ -1,6 +1,6 @@
 package com.zunayedology.spring_campaign.service.implementation;
 
-import com.zunayedology.spring_campaign.dto.CustomerDTO;
+import com.zunayedology.spring_campaign.dto.CustomerDto;
 import com.zunayedology.spring_campaign.entity.Customer;
 import com.zunayedology.spring_campaign.mapper.CustomerMapper;
 import com.zunayedology.spring_campaign.repository.CustomerRepository;
@@ -19,28 +19,28 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerDTO> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers() {
         return customerRepository.findAll().stream()
                 .map(CustomerMapper::mapToCustomerDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CustomerDTO getCustomerById(Long id) {
+    public CustomerDto getCustomerById(Long id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
         return CustomerMapper.mapToCustomerDTO(customer);
     }
 
     @Override
-    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
+    public CustomerDto createCustomer(CustomerDto customerDTO) {
         Customer customer = CustomerMapper.mapToCustomer(customerDTO);
         customer = customerRepository.save(customer);
         return CustomerMapper.mapToCustomerDTO(customer);
     }
 
     @Override
-    public CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO) {
+    public CustomerDto updateCustomer(Long id, CustomerDto customerDTO) {
         Customer existingCustomer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
         existingCustomer.setCustomerName(customerDTO.getCustomerName());

@@ -1,6 +1,6 @@
 package com.zunayedology.spring_campaign.controller;
 
-import com.zunayedology.spring_campaign.dto.MessageDTO;
+import com.zunayedology.spring_campaign.dto.MessageDto;
 import com.zunayedology.spring_campaign.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,31 +18,31 @@ public class MessageController {
     }
 
     @GetMapping
-    public List<MessageDTO> getAllMessages() {
+    public List<MessageDto> getAllMessages() {
         return messageService.getAllMessages();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MessageDTO> getMessageById(@PathVariable Long id) {
-        MessageDTO messageDTO  = messageService.getMessageById(id);
+    public ResponseEntity<MessageDto> getMessageById(@PathVariable Long id) {
+        MessageDto messageDTO = messageService.getMessageById(id);
         return ResponseEntity.ok(messageDTO);
     }
 
     @PostMapping("/ai")
-    public ResponseEntity<MessageDTO> generateMessage(@RequestParam String topic) {
-        MessageDTO newMessage = messageService.generateMessage(topic);
+    public ResponseEntity<MessageDto> generateMessage(@RequestParam String topic) {
+        MessageDto newMessage = messageService.generateMessage(topic);
         return ResponseEntity.ok(newMessage);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MessageDTO> updateMessage(@PathVariable Long id,
-                                                    @RequestBody MessageDTO messageDTO) {
-        MessageDTO updatedMessage = messageService.updateMessage(id, messageDTO);
+    public ResponseEntity<MessageDto> updateMessage(@PathVariable Long id,
+                                                    @RequestBody MessageDto messageDTO) {
+        MessageDto updatedMessage = messageService.updateMessage(id, messageDTO);
         return ResponseEntity.ok(updatedMessage);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageDTO> deleteMessage(@PathVariable Long id) {
+    public ResponseEntity<MessageDto> deleteMessage(@PathVariable Long id) {
         messageService.deleteMessage(id);
         return ResponseEntity.noContent().build();
     }

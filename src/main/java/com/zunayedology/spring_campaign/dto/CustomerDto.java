@@ -7,8 +7,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageDTO {
+public class CustomerDto {
     private Long id;
-    private String messageBody;
-    private boolean isSent;
+    private String customerName;
+    private String phoneNumber;
 }

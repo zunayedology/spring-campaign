@@ -1,13 +1,17 @@
 package com.zunayedology.spring_campaign.service;
 
-import com.zunayedology.spring_campaign.dto.MessageDTO;
+import com.zunayedology.spring_campaign.dto.MessageDto;
 
 import java.util.List;
 
 public interface MessageService {
-    List<MessageDTO> getAllMessages();
-    MessageDTO getMessageById(Long id);
-    MessageDTO generateMessage(String topic);
-    MessageDTO updateMessage(Long id, MessageDTO messageDto);
+    List<MessageDto> getAllMessages();
+
+    MessageDto getMessageById(Long id);
+
+    MessageDto generateMessage(String topic);
+
+    MessageDto updateMessage(Long id, MessageDto messageDto);
+
     void deleteMessage(Long id);
 }

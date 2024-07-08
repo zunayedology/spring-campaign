@@ -1,13 +1,17 @@
 package com.zunayedology.spring_campaign.service;
 
-import com.zunayedology.spring_campaign.dto.CustomerDTO;
+import com.zunayedology.spring_campaign.dto.CustomerDto;
 
 import java.util.List;
 
 public interface CustomerService {
-    List<CustomerDTO> getAllCustomers();
-    CustomerDTO getCustomerById(Long id);
-    CustomerDTO createCustomer(CustomerDTO customerDTO);
-    CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO);
+    List<CustomerDto> getAllCustomers();
+
+    CustomerDto getCustomerById(Long id);
+
+    CustomerDto createCustomer(CustomerDto customerDTO);
+
+    CustomerDto updateCustomer(Long id, CustomerDto customerDTO);
+
     void deleteCustomer(Long id);
 }

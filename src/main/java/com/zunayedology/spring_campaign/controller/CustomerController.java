@@ -1,6 +1,6 @@
 package com.zunayedology.spring_campaign.controller;
 
-import com.zunayedology.spring_campaign.dto.CustomerDTO;
+import com.zunayedology.spring_campaign.dto.CustomerDto;
 import com.zunayedology.spring_campaign.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,31 +17,31 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<CustomerDTO> getAllCustomers() {
+    public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable long id) {
-        CustomerDTO customerDTO = customerService.getCustomerById(id);
+    public ResponseEntity<CustomerDto> getCustomer(@PathVariable long id) {
+        CustomerDto customerDTO = customerService.getCustomerById(id);
         return ResponseEntity.ok(customerDTO);
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) {
-        CustomerDTO createdCustomer = customerService.createCustomer(customerDTO);
+    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDTO) {
+        CustomerDto createdCustomer = customerService.createCustomer(customerDTO);
         return ResponseEntity.ok(createdCustomer);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Long id,
-                                                      @RequestBody CustomerDTO customerDTO) {
-        CustomerDTO updatedCustomer = customerService.updateCustomer(id, customerDTO);
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Long id,
+                                                      @RequestBody CustomerDto customerDTO) {
+        CustomerDto updatedCustomer = customerService.updateCustomer(id, customerDTO);
         return ResponseEntity.ok(updatedCustomer);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CustomerDTO> deleteCustomer(@PathVariable long id) {
+    public ResponseEntity<CustomerDto> deleteCustomer(@PathVariable long id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
